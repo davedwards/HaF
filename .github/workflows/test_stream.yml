@@ -1,0 +1,23 @@
+name: TEST - Live Audio Stream
+
+on:
+  workflow_dispatch: # This enables the manual trigger button
+
+jobs:
+  test-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Run 60-Second Test
+      run: |
+        chmod +x test_script.sh
+        ./test_script.sh
+
+    - name: Upload Test File to GitHub (For verification)
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-audio-file
+        path: 20*_TEST_*
