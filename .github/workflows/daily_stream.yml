@@ -1,0 +1,48 @@
+name: Daily 4-Hour Audio Stream Grabber
+
+on:
+  schedule:
+    # Triggers at 1:00 PM UTC (6:00 AM PDT during Summer)
+    - cron: '0 13 * * *'
+    # Triggers at 2:00 PM UTC (6:00 AM PST during Winter)
+    - cron: '0 14 * * *'
+  workflow_dispatch:
+
+jobs:
+  capture-and-transfer:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install Dependencies
+      run: |
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        # Installs ffmpeg in case your stream script uses it to capture AAC
+        sudo apt-get update && sudo apt-get install -y ffmpeg
+
+    - name: Run Script for 4 Hours
+      run: |
+        chmod +x script.sh
+        # Runs your script to record from 6 AM to 10 AM
+        ./liveklos.sh 
+
+#    - name: Transfer Finished AAC to Local Machine
+#      env:
+#        SSH_PRIVATE_KEY: ${{ secrets.LOCAL_SSH_KEY }}
+#        LOCAL_HOST: ${{ secrets.LOCAL_HOST_IP }}
+#        LOCAL_USER: ${{ secrets.LOCAL_USER }}
+#      run: |
+#        # Securely write the SSH key to connect to your home network
+#        echo "$SSH_PRIVATE_KEY" > id_rsa
+#        chmod 600 id_rsa
+        
+        # Send the file via SCP. (Once the GitHub runner shuts down right after this, the file is automatically wiped)
+#        scp -i id_rsa -o StrictHostKeyChecking=no finished_stream.aac $LOCAL_USER@$LOCAL_HOST:/path/to/your/local/folder/
+
