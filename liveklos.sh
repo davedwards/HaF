@@ -30,7 +30,7 @@ if [ $sleep_duration -gt 0 ]; then
 echo "It is now 6:10 AM. Starting recording until 10:00 AM..."
 
 # 3. Record for exactly 3 hours and 50 minutes (13,800 seconds)
-STREAM_URL="https://14943.live.streamtheworld.com/KLOSFMAAC.aac"
+STREAM_URL="https://18233.live.streamtheworld.com/KLOSFMAAC.aac"
 
 echo "staring download..."
 
