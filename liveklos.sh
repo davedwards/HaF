@@ -29,7 +29,7 @@ fi
 echo "It is now 6:10 AM. Starting recording until 10:00 AM..."
 
 # 3. Record for exactly 3 hours and 50 minutes (13,800 seconds)
-STREAM_URL="https://22973.live.streamtheworld.com/KLOSFMAAC.aac"
+STREAM_URL="https://14943.live.streamtheworld.com/KLOSFMAAC.aac"
 curl --insecure --ssl-no-revoke --max-time 13800 "$STREAM_URL" -o "$file"
 
 echo "Recording finished at 10:00 AM."
