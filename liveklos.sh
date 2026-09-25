@@ -21,19 +21,23 @@ target_sec=$(date -d "$TARGET_TIME" +%s)
 current_sec=$(date -d "$CURRENT_TIME" +%s)
 sleep_duration=$((target_sec - current_sec))
 
+# Reenable 
 if [ $sleep_duration -gt 0 ]; then
     echo "Current time is $CURRENT_TIME. Waiting $sleep_duration seconds until $TARGET_TIME..."
     sleep $sleep_duration
-fi
+ fi
 
 echo "It is now 6:10 AM. Starting recording until 10:00 AM..."
 
 # 3. Record for exactly 3 hours and 50 minutes (13,800 seconds)
 STREAM_URL="https://14943.live.streamtheworld.com/KLOSFMAAC.aac"
 
+echo "staring download..."
+
 # Force curl to identify itself as a Chrome browser on Windows and record for 13800 seconds
-curl --insecure --ssl-no-revoke \
-  -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
+# curl --insecure --ssl-no-revoke \
+curl --insecure --ssl-no-revoke  --max-time 13800 "$STREAM_URL" -o "$file"
+#  -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
   --max-time 13800 "$STREAM_URL" -o "$file"
 
 echo "Recording finished at 10:00 AM."

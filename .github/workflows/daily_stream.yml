@@ -29,7 +29,7 @@ jobs:
 
     - name: Run Script for 4 Hours
       run: |
-        chmod +x script.sh
+        chmod +x ./liveklos.sh 
         # Runs your script to record from 6 AM to 10 AM
         ./liveklos.sh 
 
