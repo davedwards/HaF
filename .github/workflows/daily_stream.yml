@@ -33,6 +33,16 @@ jobs:
         # Runs your script to record from 6 AM to 10 AM
         ./liveklos.sh 
 
+    
+    - name: Save Audio File as Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: daily-audio-stream
+        # This matches the timestamp naming pattern (e.g., 2026_09_25_01)
+        path: 20*_0* 
+        # Keeps the file available on GitHub for 5 days
+        retention-days: 5
+
 #    - name: Transfer Finished AAC to Local Machine
 #      env:
 #        SSH_PRIVATE_KEY: ${{ secrets.LOCAL_SSH_KEY }}
