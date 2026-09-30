@@ -10,8 +10,8 @@ on:
     # Enable weekends for testing
     # Triggers at 1:00 PM UTC (6:00 AM PDT during Summer)
     - cron: '0 13 * * *'
-    # Triggers at 2:00 PM UTC (6:00 AM PST during Winter)
-    - cron: '0 14 * * *'
+    # Triggers at 2:00 PM UTC (6:00 AM PST during Winter) # Disable because causing double recordings
+    # - cron: '0 14 * * *'
   workflow_dispatch:
 
 jobs:
