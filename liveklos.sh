@@ -1,14 +1,19 @@
 #!/bin/bash
 
 # 1. Generate the unique daily filename
-c=1
-file=$(date +"%Y_%m_%d_0"$c)
+# Capture the start time in UTC, to the second
+start_time=$(date -u +"%Y_%m_%d_%H_%M_%S")
 
-while test -e "$file"; do 
+# Generate a unique filename
+c=1
+file="${start_time}_$(printf '%02d' "$c")"
+
+while test -e "$file"; do
     echo "$file exists"
     c=$((c + 1))
-    file=$(date +"%Y_%m_%d_0"$c)
+    file="${start_time}_$(printf '%02d' "$c")"
 done
+
 echo "Creating new file: $file"
 
 # 2. Wait until exactly 6:10 AM PST/PDT
