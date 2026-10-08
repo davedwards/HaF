@@ -31,7 +31,10 @@ if [ $sleep_duration -gt 0 ]; then
     echo "Current time is $CURRENT_TIME. Waiting $sleep_duration seconds until $TARGET_TIME..."
     sleep $sleep_duration
  fi
-
+ 
+# Get the server's local time and print it
+start_time=$(date +"%Y_%m_%d_%H_%M_%S")
+echo "Script start time (server local time): $(date)"
 echo "It is now 6:05 AM. Starting recording until 10:00 AM..."
 
 # 3. Record for exactly 3 hours and 50 minutes (13,800 seconds)
