@@ -2,11 +2,9 @@ name: Daily 4-Hour Audio Stream Grabber
 
 on:
   schedule:
-    # Triggers at 1:00 PM UTC / 6:00 AM PDT everyday
-    - cron: '0 13 * * *'
-    # - cron: '0 13 * * 1-5'
-    # Triggers at 2:00 PM UTC / 6:00 AM PST (Monday to Friday)
-    # - cron: '0 14 * * 1-5'
+    - cron: '0 6 * * *'
+      timezone: 'America/Los_Angeles'
+      
   workflow_dispatch:
 
 jobs:
