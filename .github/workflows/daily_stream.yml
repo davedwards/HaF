@@ -1,10 +1,11 @@
 name: Daily 4-Hour Audio Stream Grabber
 
 on:
-  schedule:
-    - cron: '0 6 * * *'
-      timezone: 'America/Los_Angeles'
-      
+  # Listens for an immediate external webhook request to bypass schedule lag
+  repository_dispatch:
+    types: [start_recording]
+
+  # Keeps manual capability in the GitHub UI just in case
   workflow_dispatch:
 
 jobs:
@@ -28,17 +29,16 @@ jobs:
 
     - name: Run Script for 4 Hours
       run: |
-        chmod +x ./liveklos.sh 
+        chmod +x ./liveklos.sh
         # Runs your script to record from 6 AM to 10 AM
-        ./liveklos.sh 
+        ./liveklos.sh
 
-    
     - name: Save Audio File as Artifact
       uses: actions/upload-artifact@v4
       with:
         name: daily-audio-stream
         # This matches the timestamp naming pattern (e.g., 2026_09_25_01)
-        path: 20*_0* 
+        path: 20*_0*
         # Keeps the file available on GitHub for 5 days
         retention-days: 5
 
