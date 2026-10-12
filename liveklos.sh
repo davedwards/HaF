@@ -45,8 +45,8 @@ echo "staring download..."
 
 # Force curl to identify itself as a Chrome browser on Windows and record for 13800 seconds
 # curl --insecure --ssl-no-revoke \
-curl --insecure --ssl-no-revoke  --max-time 14400 "$STREAM_URL" -o "$file"
+curl --insecure --ssl-no-revoke  --max-time 21600 "$STREAM_URL" -o "$file"
 #  -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
-  --max-time 14400 "$STREAM_URL" -o "$file"
+  --max-time 21600 "$STREAM_URL" -o "$file"
 
 echo "Recording finished at 10:00 AM."

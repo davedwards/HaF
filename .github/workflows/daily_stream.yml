@@ -1,11 +1,10 @@
 name: Daily 4-Hour Audio Stream Grabber
 
 on:
-  # Listens for an immediate external webhook request to bypass schedule lag
-  repository_dispatch:
-    types: [start_recording]
-
-  # Keeps manual capability in the GitHub UI just in case
+  schedule:
+    - cron: '30 1 * * *'
+      timezone: 'America/Los_Angeles'
+      
   workflow_dispatch:
 
 jobs:
@@ -26,19 +25,18 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         # Installs ffmpeg in case your stream script uses it to capture AAC
         sudo apt-get update && sudo apt-get install -y ffmpeg
-
     - name: Run Script for 4 Hours
       run: |
-        chmod +x ./liveklos.sh
+        chmod +x ./liveklos.sh 
         # Runs your script to record from 6 AM to 10 AM
-        ./liveklos.sh
-
+        ./liveklos.sh 
+    
     - name: Save Audio File as Artifact
       uses: actions/upload-artifact@v4
       with:
         name: daily-audio-stream
         # This matches the timestamp naming pattern (e.g., 2026_09_25_01)
-        path: 20*_0*
+        path: 20*_0* 
         # Keeps the file available on GitHub for 5 days
         retention-days: 5
 
@@ -54,4 +52,3 @@ jobs:
         
         # Send the file via SCP. (Once the GitHub runner shuts down right after this, the file is automatically wiped)
 #        scp -i id_rsa -o StrictHostKeyChecking=no finished_stream.aac $LOCAL_USER@$LOCAL_HOST:/path/to/your/local/folder/
-
