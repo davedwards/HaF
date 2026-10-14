@@ -2,9 +2,9 @@ name: Daily 4-Hour Audio Stream Grabber
 
 on:
   schedule:
-    - cron: '30 1 * * *'
-      timezone: 'America/Los_Angeles'
-      
+    # 6:14 AM Pacific Time (PDT) is 13:14 UTC.
+    # Note: When Daylight Saving Time ends, this will run at 5:14 AM Pacific Time (PST).
+    - cron: '14 13 * * *'
   workflow_dispatch:
 
 jobs:
@@ -25,12 +25,13 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         # Installs ffmpeg in case your stream script uses it to capture AAC
         sudo apt-get update && sudo apt-get install -y ffmpeg
+
     - name: Run Script for 4 Hours
       run: |
         chmod +x ./liveklos.sh 
         # Runs your script to record from 6 AM to 10 AM
-        ./liveklos.sh 
-    
+        ./liveklos.sh  
+
     - name: Save Audio File as Artifact
       uses: actions/upload-artifact@v4
       with:
