@@ -2,9 +2,9 @@ name: Daily 4-Hour Audio Stream Grabber
 
 on:
   schedule:
-    # 6:14 AM Pacific Time (PDT) is 13:14 UTC.
-    # Note: When Daylight Saving Time ends, this will run at 5:14 AM Pacific Time (PST).
-    - cron: '14 13 * * *'
+    # 6:10 AM PDT is 13:10 UTC.
+    # During PST, this runs at 5:10 AM Pacific.
+    - cron: '10 13 * * *'  
   workflow_dispatch:
 
 jobs:
