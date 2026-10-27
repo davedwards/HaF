@@ -4,7 +4,7 @@ on:
   schedule:
     # 6:10 AM PDT is 13:10 UTC.
     # During PST, this runs at 5:10 AM Pacific.
-    - cron: '10 13 * * *'  
+    - cron: '10 07 * * *'  
   workflow_dispatch:
 
 jobs:
